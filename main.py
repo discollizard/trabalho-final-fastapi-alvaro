@@ -7,6 +7,7 @@ import time
 
 app = FastAPI()
 
+
 class Entrada(BaseModel):
     id: Optional[int]
     nome: str = Field(..., max_length=20)
@@ -78,3 +79,5 @@ def remover_cliente(id: int):
             remove_da_fila("P",id)
             return True
     return HTTPException(status_code=404, detail="Cliente não encontrado")
+
+uvicorn.run("main:app", port=443, log_level="info")
