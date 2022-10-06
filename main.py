@@ -4,7 +4,6 @@ from typing import Optional
 from fastapi.responses import JSONResponse
 from datetime import datetime
 import time
-import uvicorn
 
 app = FastAPI()
 
@@ -53,7 +52,7 @@ def mostra_entrada(id: int):
 @app.post('/fila')
 def adiciona_entrada(entrada: Entrada):
     entrada.id = len(fila['N']) + len(fila['P'])
-    if entrada.prioridade is not 'N' and entrada.prioridade is not 'P':
+    if entrada.prioridade != 'N' and entrada.prioridade != 'P':
         raise HTTPException(status_code=400, detail="Prioridade deve ser apenas N para normal e P para prioritario")
     fila[entrada.prioridade].append(entrada)
     return True
@@ -81,4 +80,3 @@ def remover_cliente(id: int):
             return True
     return HTTPException(status_code=404, detail="Cliente não encontrado")
 
-uvicorn.run("main:app", port=443, log_level="info")
