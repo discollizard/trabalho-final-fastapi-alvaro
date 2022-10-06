@@ -15,6 +15,7 @@ class Entrada(BaseModel):
     prioridade: str = Field(..., max_length=1)
     atendido: bool = False
 
+print('banana')
 
 fila = {
     "N": [],
