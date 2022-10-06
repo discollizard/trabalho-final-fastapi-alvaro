@@ -4,6 +4,7 @@ from typing import Optional
 from fastapi.responses import JSONResponse
 from datetime import datetime
 import time
+import uvicorn
 
 app = FastAPI()
 
