@@ -15,7 +15,6 @@ class Entrada(BaseModel):
     prioridade: str = Field(..., max_length=1)
     atendido: bool = False
 
-print('banana')
 
 fila = {
     "N": [],
@@ -45,10 +44,13 @@ def mostrar_fila():
 
 @app.get('/fila/{id}')
 def mostra_entrada(id: int):
-    try:
-        return fila[id]
-    except:
-        raise HTTPException(status_code=404, detail="Não encontrado na fila")
+    for item in fila["P"]:
+        if item.id == id:
+            return item
+    for item in fila["N"]:
+        if item.id == id:
+            return item
+    return HTTPException(status_code=404, detail="Não encontrado na fila")
 
 @app.post('/fila')
 def adiciona_entrada(entrada: Entrada):
